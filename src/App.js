@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Transition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import "./App.css";
 
 class App extends Component {
@@ -30,17 +30,18 @@ class App extends Component {
         >
           Toggle
         </button>
-        <Transition
-          in={this.state.show}
-          timeout={animateTime}
-          mountOnEnter
-          unmountOnExit
-          onEnter={()=> console.log("onEnter")}
-          onEntering={()=> console.log("onEntering")}
-          onEntered={()=> console.log("onEntered")}
-          onExit={() => console.log("onExit")}
-          onExiting={() => console.log("onExiting")}
-          onExited={() => console.log("onExited")}
+        <CSSTransition
+        in={this.state.show}
+        timeout={animateTime}
+        mountOnEnter
+        unmountOnExit
+        onEnter={()=> console.log("onEnter")}
+        onEntering={()=> console.log("onEntering")}
+        onEntered={()=> console.log("onEntered")}
+        onExit={() => console.log("onExit")}
+        onExiting={() => console.log("onExiting")}
+        onExited={() => console.log("onExited")}
+        classNames = "my-node"
         >
           {(mode) => (
             <div
@@ -49,14 +50,15 @@ class App extends Component {
                 background: "black",
                 color: "white",
                 borderRadius: 4,
-                transition: "opacity 1s ease-out",
-                opacity: mode === "exiting" || mode === "entering" ? 0 : 1,
+                // transition: "opacity 1s ease-out",
+                // opacity: mode === "exiting" || mode === "entering" ? 0 : 1,
               }}
             >
               <p>React Animation Group</p>
             </div>
           )}
-        </Transition>
+
+        </CSSTransition>
         <p>
           <strong>That Is Outside Animation Group!</strong>
         </p>
