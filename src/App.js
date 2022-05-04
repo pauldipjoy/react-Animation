@@ -7,14 +7,17 @@ class App extends Component {
     show: true,
   };
   render() {
-    
-
     // There are 4 main states a Transition can be in:
 
     // 'entering'
     // 'entered'
     // 'exiting'
     // 'exited'
+
+    const animateTime = {
+      enter: 1000,
+      exit: 500,
+    };
 
     return (
       <div className="App">
@@ -27,21 +30,36 @@ class App extends Component {
         >
           Toggle
         </button>
-        <Transition in={this.state.show} timeout={1000}>
+        <Transition
+          in={this.state.show}
+          timeout={animateTime}
+          mountOnEnter
+          unmountOnExit
+          onEnter={()=> console.log("onEnter")}
+          onEntering={()=> console.log("onEntering")}
+          onEntered={()=> console.log("onEntered")}
+          onExit={() => console.log("onExit")}
+          onExiting={() => console.log("onExiting")}
+          onExited={() => console.log("onExited")}
+        >
           {(mode) => (
-            <div style={
-              {
+            <div
+              style={{
                 // display: this.state.show ? "block" : "none",
                 background: "black",
                 color: "white",
-                // borderRadius: 4,
-                transition: "opacity 2s ease-out",
-                opacity: mode === "exited" ? 0 : 1,
-              }}>
-              <p> React Animation Group </p>
+                borderRadius: 4,
+                transition: "opacity 1s ease-out",
+                opacity: mode === "exiting" || mode === "entering" ? 0 : 1,
+              }}
+            >
+              <p>React Animation Group</p>
             </div>
           )}
         </Transition>
+        <p>
+          <strong>That Is Outside Animation Group!</strong>
+        </p>
       </div>
     );
   }
